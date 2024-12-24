@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Quizzes</title>
+    <!-- Add Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <!-- Add custom CSS -->
+   
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            background: linear-gradient(135deg, #0ad3dd, #a76b8c); /* Matching gradient */
+            color: #333;
+            margin: 0;
+            padding: 0;
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .container {
+            max-width: 800px;
+            background: #fff;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            padding: 20px;
+            animation: fadeIn 1s ease-in-out;
+        }
+
+        h2, h3 {
+            text-align: center;
+            color: #2F9E99;
+        }
+
+        .quiz-box {
+            border: 2px solid #2F9E99;
+            border-radius: 10px;
+            padding: 15px;
+            margin-bottom: 20px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            animation: slideIn 0.8s ease-out;
+            background: #f9f9f9;
+        }
+
+        .quiz-box:hover {
+            transform: scale(1.02);
+            transition: transform 0.2s ease-in-out;
+        }
+
+        .question-text {
+            background: #4CAF50;
+            color: #fff;
+            padding: 10px;
+            border-radius: 5px;
+            margin-bottom: 15px;
+        }
+
+        .options {
+            margin-left: 20px;
+        }
+
+        .options label {
+            display: block;
+            padding: 5px 10px;
+            background: #e0f7fa;
+            border-radius: 4px;
+            margin-bottom: 10px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+        .options label:hover {
+            background: #b2ebf2;
+        }
+
+        button {
+            width: 100%;
+            padding: 10px 15px;
+            font-size: 1rem;
+            background: #2F9E99;
+            color: #fff;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+        button:hover {
+            background: #4CAF50;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+            }
+            to {
+                opacity: 1;
+            }
+        }
+
+        @keyframes slideIn {
+            from {
+                transform: translateY(20px);
+                opacity: 0;
+            }
+            to {
+                transform: translateY(0);
+                opacity: 1;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <h2>Quizzes for Course ID: {{ course_id }}</h2>
+        <h3> {{ quiz.course_id }}</h3>
+        <form method="POST">
+            {% csrf_token %}
+            
+            {% for quiz in quizzes %}
+                <h3> {{ quiz.course_id }}</h3>
+                {% for question in quiz.questions.all %}
+                    <div class="quiz-box">
+                        <!-- Question Text -->
+                        <div class="question-text">
+                            <p>{{ question.question_text }}</p>
+                        </div>
+                        <!-- Options -->
+                        <div class="options">
+                            {% for choice in question.choices.all %}
+                                <label>
+                                    <input type="radio" name="question_{{ question.id }}" value="{{ choice.choice_text }}">
+                                    {{ choice.choice_text }}
+                                </label>
+                            {% endfor %}
+                        </div>
+                    </div>
+                {% endfor %}
+            {% endfor %}
+
+            <button type="submit">Submit Quiz</button>
+        </form>
+    </div>
+
+    <!-- Add Bootstrap JS -->
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.3/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+
+</html>

@@ -1,0 +1,276 @@
+/* General body styling */
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f4f7f6;
+    margin: 0;
+    padding: 0;
+}
+
+
+.pagination {
+    margin-top: 20px;
+    text-align: center;
+}
+
+.pagination .step-links a {
+    text-decoration: none;
+    color: #007bff;
+    padding: 5px 10px;
+    border: 1px solid #ddd;
+    margin: 0 5px;
+}
+
+.pagination .step-links a:hover {
+    background-color: #f1f1f1;
+}
+
+.pagination .current {
+    padding: 5px 10px;
+    color: #555;
+}
+
+
+
+/* Main container */
+.container {
+    max-width: 1200px;
+    margin: 30px auto;
+    padding: 30px;
+    background-color: #ffffff;
+    border-radius: 10px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+}
+
+/* Header */
+h1 {
+    text-align: center;
+    font-size: 2.5em;
+    color: #333;
+    margin-bottom: 20px;
+}
+
+/* Sub-header for sections */
+h2 {
+    font-size: 1.8em;
+    color: #4CAF50;
+    margin-bottom: 20px;
+    border-bottom: 2px solid #ddd;
+    padding-bottom: 10px;
+}
+
+/* Paragraph text */
+p {
+    font-size: 1.2em;
+    color: #555;
+    text-align: center;
+    margin-bottom: 30px;
+}
+
+/* Form and input fields */
+.form-group {
+    margin-bottom: 20px;
+}
+
+.form-group label {
+    display: block;
+    font-weight: bold;
+    margin-bottom: 5px;
+    color: #333;
+}
+
+.form-group input,
+.form-group textarea {
+    width: 100%;
+    padding: 12px;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    font-size: 1.1em;
+    box-sizing: border-box;
+}
+
+.form-group textarea {
+    height: 150px;
+}
+
+/* Button styling */
+.btn {
+    display: inline-block;
+    background-color: #4CAF50;
+    color: white;
+    padding: 15px 30px;
+    border-radius: 8px;
+    text-align: center;
+    font-size: 1.2em;
+    cursor: pointer;
+    text-decoration: none;
+}
+
+.btn:hover {
+    background-color: #45a049;
+}
+
+/* Table styling */
+.quiz-table,
+.performance-table,
+.attendance-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 40px;
+}
+
+.quiz-table th, .quiz-table td,
+.performance-table th, .performance-table td,
+.attendance-table th, .attendance-table td {
+    padding: 12px;
+    text-align: left;
+    border-bottom: 1px solid #ddd;
+}
+
+.quiz-table th, .performance-table th, .attendance-table th {
+    background-color: #f4f4f4;
+    color: #333;
+    font-size: 1.2em;
+}
+
+.quiz-table tr:hover,
+.performance-table tr:hover,
+.attendance-table tr:hover {
+    background-color: #f9f9f9;
+}
+
+/* Table alignment for Student Performance */
+.student-performance table th, .student-performance table td {
+    text-align: center;
+}
+
+.student-performance table th {
+    background-color: #f4f4f4;
+    color: #333;
+}
+
+/* Form section styling */
+.upload-quiz {
+    margin-bottom: 30px;
+}
+
+.upload-quiz form {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 20px;
+}
+
+.upload-quiz .form-group {
+    width: 100%;
+}
+
+.upload-quiz h2 {
+    color: #333;
+}
+
+/* Existing Quizzes Section */
+.existing-quizzes {
+    margin-top: 50px;
+}
+
+/* Student Performance Section */
+.student-performance {
+    margin-top: 50px;
+}
+
+/* Attendance Section */
+.attendance-table {
+    margin-top: 50px;
+}
+
+/* Footer section */
+footer {
+    text-align: center;
+    margin-top: 40px;
+    font-size: 1em;
+    color: #888;
+}
+
+/* Table styling */
+.table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 40px;
+}
+
+.table th, .table td {
+    padding: 12px;
+    text-align: left;
+    border-bottom: 1px solid #ddd;
+}
+
+.table th {
+    background-color: #f4f4f4;
+    color: #333;
+    font-size: 1.2em;
+}
+
+.table tr:hover {
+    background-color: #f9f9f9;
+}
+
+/* Remove empty row gaps in table */
+.no-data td {
+    text-align: center;
+    color: #777;
+    font-style: italic;
+}
+
+
+/* Responsive design */
+@media (max-width: 768px) {
+    .container {
+        margin: 15px;
+        padding: 20px;
+    }
+
+    .form-group input,
+    .form-group textarea {
+        font-size: 0.9em;
+    }
+
+    .quiz-table th, .quiz-table td,
+    .performance-table th, .performance-table td,
+    .attendance-table th, .attendance-table td {
+        font-size: 0.9em;
+    }
+
+    h1 {
+        font-size: 2em;
+    }
+
+    h2 {
+        font-size: 1.5em;
+    }
+}
+
+/* Styling for the logout button */
+.logout-btn {
+    display: inline-block;
+    background-color: #d9534f; /* Red color */
+    color: white;
+    padding: 12px 25px;  /* Increased padding */
+    font-size: 1.1em; /* Slightly larger font */
+    text-align: center;
+    border-radius: 5px;
+    text-decoration: none;
+    margin-top: 20px;
+    margin-right: 20px; /* Added right margin */
+    float: right; /* Align it to the right */
+    transition: background-color 0.3s ease;
+}
+
+.logout-btn:hover {
+    background-color: #c9302c; /* Darker red on hover */
+}
+
+/* Ensures the logout button is in a separate, well-positioned container */
+.logout-container {
+    text-align: right; /* Align the logout button to the right */
+    margin-top: 20px; /* Add top margin to separate it from the main content */
+    margin-bottom: 20px; /* Add bottom margin for better spacing */
+}

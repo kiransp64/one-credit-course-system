@@ -1,0 +1,169 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>One Credit Course Assessment</title>
+    <!-- Add Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="{% static 'css/styles.css' %}">
+    <style>
+        /* Gradient Background */
+        body {
+            background: linear-gradient(to bottom, #e3f2fd, #ffffff);
+            font-family: Arial, sans-serif;
+        }
+
+        /* Navbar with Gradient */
+        .navbar {
+            background: linear-gradient(45deg, #4CAF50, #2F9E99);
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        /* "How It Works" Box */
+        .how-it-works-box {
+            background-color: #fff;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            padding: 20px;
+            margin-top: 30px;
+        }
+
+        /* Timeline Styling */
+        .timeline {
+            list-style: none;
+            padding: 0;
+            position: relative;
+        }
+
+        .timeline li {
+            margin: 20px 0;
+            padding: 15px 20px;
+            background: #f9f9f9;
+            border-radius: 10px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+            position: relative;
+        }
+
+        .timeline li span.badge {
+            background: linear-gradient(135deg, #4CAF50, #2F9E99);
+            color: #fff;
+            padding: 10px;
+            font-weight: bold;
+            border-radius: 5px;
+        }
+
+        .timeline li p {
+            margin: 10px 0 0;
+            color: #555;
+            font-size: 1rem;
+        }
+
+        /* Call-to-Action Buttons */
+        .cta-buttons a {
+            margin: 5px;
+            transition: transform 0.2s ease;
+        }
+
+        .cta-buttons a:hover {
+            transform: scale(1.05);
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+        }
+
+        /* Footer */
+        footer {
+            background: #4CAF50;
+            color: white;
+            text-align: center;
+            padding: 10px 0;
+            margin-top: 50px;
+        }
+
+        footer a {
+            color: white;
+            text-decoration: none;
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation Bar -->
+    <nav class="navbar navbar-expand-lg navbar-light">
+        <div class="container-fluid">
+            <a class="navbar-brand text-white" href="#">P E S Institute of Technology and Management, Shivamogga</a>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ml-auto">
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <div class="container mt-4">
+        {% block content %}
+        {% endblock %}
+    </div>
+
+
+
+<!-- Key Features Section -->
+<div class="container mt-5">
+    <h2 class="text-center">Key Features</h2>
+    <ul class="timeline">
+        <li>
+            <span class="badge badge-primary">Feature 1</span>
+            <p>Teachers can create and upload quizzes seamlessly, and monitor student performance.</p>
+        </li>
+        <li>
+            <span class="badge badge-secondary">Feature 2</span>
+            <p>Students log in to access quizzes and attempt them before deadlines.</p>
+        </li>
+        <li>
+            <span class="badge badge-success">Feature 3</span>
+            <p>The system automatically evaluates quizzes and generates scores in real-time.</p>
+        </li>
+        <li>
+            <span class="badge badge-warning">Feature 4</span>
+            <p>Email reminders are sent to students to ensure they attend quizzes on time.</p>
+        </li>
+        <li>
+            <span class="badge badge-info">Feature 5</span>
+            <p>Quizzes can be scheduled and automatically uploaded weekly using Cron jobs.</p>
+        </li>
+        <li>
+            <span class="badge badge-danger">Feature 6</span>
+            <p>Admins have full control to manage students, teachers, and platform settings.</p>
+        </li>
+    </ul>
+    <div class="text-center cta-buttons">
+                <a href="{% url 'register' %}" class="btn btn-success btn-lg">Register</a>
+                <a href="{% url 'login' %}" class="btn btn-primary btn-lg">Login</a>
+            </div>
+</div>
+
+
+
+        </div>
+    </div>
+
+    <!-- Testimonials Section -->
+    <div class="container mt-5 text-center">
+        <h3>What Our Users Say</h3>
+        <p class="text-muted"><em>"This platform has revolutionized the way we manage assessments!"</em> – Teacher</p>
+        <p class="text-muted"><em>"I can now easily track my quiz performance and progress!"</em> – Student</p>
+    </div>
+
+    <!-- Footer -->
+    <footer>
+        <p>&copy; 2024 One Credit Course Assessment System. All Rights Reserved. | <a href="#">Privacy Policy</a></p>
+    </footer>
+
+    <!-- Scripts -->
+    <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.3/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
+</body>
+</html>

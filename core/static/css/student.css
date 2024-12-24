@@ -1,0 +1,186 @@
+/* Styling for the dashboard */
+body {
+    font-family: 'Arial', sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f4f7fc;
+    color: #333;
+}
+
+.pagination {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 20px;
+}
+
+.pagination a,
+.pagination span {
+    background-color: #007bff;
+    color: white;
+    padding: 8px 16px;
+    border-radius: 4px;
+    margin: 0 5px;
+    text-decoration: none;
+    font-size: 1em;
+}
+
+.pagination a:hover {
+    background-color: #0056b3;
+}
+
+/* Current page styling */
+.pagination .current {
+    background-color: #28a745;
+    font-weight: bold;
+    cursor: default;
+}
+
+/* Disabled page styling */
+.pagination .disabled {
+    background-color: #ccc;
+    color: #777;
+    cursor: not-allowed;
+}
+
+.pagination a:focus {
+    outline: none;
+    border: 2px solid #0056b3;
+}
+
+
+/* Header styles */
+h2 {
+    text-align: center;
+    color: #333;
+    font-size: 28px;
+    margin-top: 20px;
+}
+
+/* Section titles */
+h3 {
+    font-size: 22px;
+    color: #444;
+    border-bottom: 2px solid #ddd;
+    padding-bottom: 5px;
+    margin-bottom: 20px;
+}
+
+/* Table styling */
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-bottom: 30px;
+}
+
+table th, table td {
+    padding: 10px;
+    text-align: left;
+    border: 1px solid #ddd;
+}
+
+table th {
+    background-color: #f4f4f4;
+    color: #555;
+}
+
+table tr:nth-child(even) {
+    background-color: #f9f9f9;
+}
+
+table td a {
+    background-color: #007bff;
+    color: white;
+    text-decoration: none;
+    padding: 8px 16px;
+    border-radius: 4px;
+    display: inline-block;
+}
+
+table td a:hover {
+    background-color: #0056b3;
+}
+
+/* Layout for the sections */
+.container {
+    width: 80%;
+    margin: 0 auto;
+    padding: 20px;
+    background-color: white;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.container .row {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    margin-bottom: 20px;
+}
+
+.container .row .col {
+    flex: 1;
+    margin: 10px;
+}
+
+/* Card style for sections */
+.card {
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    padding: 15px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    margin-bottom: 20px;
+}
+
+.card h3 {
+    margin-top: 0;
+}
+
+/* Styling for "No Data" rows */
+.no-data {
+    color: #999;
+    text-align: center;
+    font-style: italic;
+}
+
+/* Additional styling for the student performance and attendance */
+.performance-table,
+.attendance-table {
+    margin-top: 30px;
+    border-top: 3px solid #ddd;
+    padding-top: 10px;
+}
+
+/* Styling the performance rows */
+.performance-table tr:nth-child(even),
+.attendance-table tr:nth-child(even) {
+    background-color: #f9f9f9;
+}
+
+/* Styling for the logout button */
+.logout-btn {
+    display: inline-block;
+    background-color: #d9534f; /* Red color */
+    color: white;
+    padding: 12px 25px;  /* Increased padding */
+    font-size: 1.1em; /* Slightly larger font */
+    text-align: center;
+    border-radius: 5px;
+    text-decoration: none;
+    margin-top: 20px;
+    margin-right: 20px; /* Added right margin */
+    float: right; /* Align it to the right */
+    transition: background-color 0.3s ease;
+}
+
+.logout-btn:hover {
+    background-color: #c9302c; /* Darker red on hover */
+}
+
+/* Ensures the logout button is in a separate, well-positioned container */
+.logout-container {
+    text-align: right; /* Align the logout button to the right */
+    margin-top: 20px; /* Add top margin to separate it from the main content */
+    margin-bottom: 20px; /* Add bottom margin for better spacing */
+}
+

@@ -1,0 +1,45 @@
+{% load static %}
+
+<link rel="stylesheet" href="{% static 'css/profile.css' %}">
+
+{% block content %}
+<div class="container mt-5">
+    <h2 class="text-center">Welcome, {{ user.username }}!</h2>
+
+    <!-- Display Profile Picture -->
+    <div class="text-center mb-3">
+        {% if user.profile_picture %}
+            <img src="{{ user.profile_picture.url }}" alt="Profile Picture" class="img-thumbnail" width="150" height="150">
+        {% else %}
+            <img src="{% static 'images/default_profile.png' %}" alt="Default Profile Picture" class="img-thumbnail" width="150" height="150">
+        {% endif %}
+    </div>
+
+    <!-- User Details -->
+    <div class="card shadow-sm p-4">
+        <h4>Your Profile</h4>
+        <ul class="list-unstyled">
+            <li><strong>Username:</strong> {{ user.username }}</li>
+            <li><strong>Email:</strong> {{ user.email }}</li>
+            <li><strong>Role:</strong> {{ user.role|title }}</li>
+            <li><strong>Last Login:</strong> {{ user.last_login|date:"F d, Y H:i:s" }}</li>
+        </ul>
+    </div>
+
+
+
+    <!-- Role-Specific Navigation -->
+    <div class="mt-4">
+        {% if user.role == 'teacher' %}
+            <a href="{% url 'teacher_dashboard' %}" class="btn btn-primary">Go to Teacher Dashboard</a>
+        {% elif user.role == 'student' %}
+            <a href="{% url 'student_dashboard' %}" class="btn btn-primary">Go to Student Dashboard</a>
+        {% endif %}
+        <form action="{% url 'logout' %}" method="POST" style="display: inline;">
+    {% csrf_token %}
+    <button type="submit" class="btn btn-danger">Logout</button>
+</form>
+
+    </div>
+</div>
+{% endblock %}

@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Teacher Dashboard</title>
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'css/teacher.css' %}">
+    <style>
+        body {
+            background: linear-gradient(#4CAF50, #2F9E99);
+            font-family: 'Arial', sans-serif;
+        }
+        .container {
+            margin: 20px;
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+        }
+        h1, h2, h3 {
+            color: #4CAF50;
+        }
+    </style>
+</head>
+<body>
+<div class="container">
+    <form method="POST" action="{% url 'logout' %}">
+        {% csrf_token %}
+        <button type="submit" class="btn btn-danger btn-sm">Logout</button>
+    </form>
+    <h1>Teacher Dashboard</h1>
+    <p>Welcome, {{ user.username }}! Manage your quizzes and monitor student performance here.</p>
+
+    <!-- Upload Quiz Section -->
+    <div class="upload-quiz">
+        <h2>Upload a Quiz</h2>
+        <form method="POST" enctype="multipart/form-data">
+            {% csrf_token %}
+            <label for="excel_file">Upload Excel File:</label>
+            <input type="file" name="excel_file" id="excel_file" accept=".xlsx" required>
+            <button type="submit" class="btn btn-primary mt-2">Upload Quiz</button>
+        </form>
+    </div>
+
+    <!-- Existing Quizzes Section -->
+    <div class="existing-quizzes">
+        <h2>Existing Quizzes</h2>
+        <table class="quiz-table">
+            <thead>
+                <tr>
+                    <th>Course ID</th>
+                    <th>Questions</th>
+                    <th>Correct Answers</th>
+                    <th>Image</th>
+                    <th>Deadline</th>
+                    <th>Status</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for quiz in page_obj %}
+                <tr>
+                    <td>{{ quiz.course_id }}</td>
+                    <td>
+                        {% for question in quiz.questions.all %}
+                        <p><strong>{{ question.question_text }}</strong></p>
+                        <ul>
+                            {% for choice in question.choices.all %}
+                            <li>{{ choice.choice_text }}</li>
+                            {% endfor %}
+                        </ul>
+                        {% endfor %}
+                    </td>
+                    <td>
+                        {% for question in quiz.questions.all %}
+                        <p>{{ question.correct_answer }}</p>
+                        {% endfor %}
+                    </td>
+                    <td>
+                        {% if quiz.image %}
+                        <img src="{{ quiz.image.url }}" alt="Quiz Image" style="width:100px;">
+                        {% else %}
+                        No Image
+                        {% endif %}
+                    </td>
+                    <td>
+                        Deadline: {{ quiz.deadline|date:"M d, Y, g:i a" }} <br>
+                        Current Time: {{ now|date:"M d, Y, g:i a" }}
+                    </td>
+                    <td>
+                        {% if quiz.deadline > now %}
+                        <span style="color: green; font-weight: bold;">Active</span>
+                        {% else %}
+                        <span style="color: red; font-weight: bold;">Expired</span>
+                        {% endif %}
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+        <div class="pagination">
+            {% if page_obj.has_previous %}
+            <a href="?page=1">&laquo; First</a>
+            <a href="?page={{ page_obj.previous_page_number }}">Previous</a>
+            {% endif %}
+            <span>Page {{ page_obj.number }} of {{ page_obj.paginator.num_pages }}</span>
+            {% if page_obj.has_next %}
+            <a href="?page={{ page_obj.next_page_number }}">Next</a>
+            <a href="?page={{ page_obj.paginator.num_pages }}">Last &raquo;</a>
+            {% endif %}
+        </div>
+    </div>
+
+    <!-- Student Performance Section -->
+    <div class="student-performance">
+        <h3>Student Performance</h3>
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>Student</th>
+                    <th>Total Quizzes Attended</th>
+                    <th>Total Marks Obtained</th>
+                    <th>Last Quiz Date</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for performance in page_obj_perf %}
+                <tr>
+                    <td>{{ performance.student__username }}</td>
+                    <td>{{ performance.total_quizzes }}</td>
+                    <td>{{ performance.total_marks }}</td>
+                    <td>{{ performance.last_quiz_date|date:"M d, Y" }}</td>
+                </tr>
+                {% empty %}
+                <tr>
+                    <td colspan="4">No performance data available.</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+        <div class="pagination">
+            {% if page_obj_perf.has_previous %}
+            <a href="?page_perf=1">&laquo; First</a>
+            <a href="?page_perf={{ page_obj_perf.previous_page_number }}">Previous</a>
+            {% endif %}
+            <span>Page {{ page_obj_perf.number }} of {{ page_obj_perf.paginator.num_pages }}</span>
+            {% if page_obj_perf.has_next %}
+            <a href="?page_perf={{ page_obj_perf.next_page_number }}">Next</a>
+            <a href="?page_perf={{ page_obj_perf.paginator.num_pages }}">Last &raquo;</a>
+            {% endif %}
+        </div>
+    </div>
+</div>
+</body>
+</html>

@@ -1,0 +1,297 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Register</title>
+    <!-- Add Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <!-- Add custom CSS for further customization -->
+    <link rel="stylesheet" href="{% static 'css/register.css' %}">
+     <!-- Add custom CSS -->
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            background: linear-gradient(135deg, #4CAF50, #2F9E99);
+            color: #333;
+            margin: 0;
+            padding: 0;
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            overflow: hidden;
+        }
+
+        .form-container {
+            background-color: #fff;
+            padding: 30px 40px;
+            border-radius: 10px;
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
+            max-width: 500px;
+            width: 100%;
+            animation: fadeIn 1s ease-in-out;
+            position: relative;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(-20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        h2 {
+            font-size: 2rem;
+            margin-bottom: 20px;
+            color: #2F9E99;
+            text-align: center;
+            font-weight: bold;
+        }
+
+        label {
+            font-size: 1rem;
+            font-weight: bold;
+            color: #555;
+        }
+
+        input,
+        select {
+            font-size: 0.9rem;
+            padding: 10px;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        .btn {
+            font-size: 1rem;
+            padding: 10px 20px;
+            background: #2F9E99;
+            border: none;
+            color: #fff;
+            border-radius: 5px;
+            transition: background-color 0.3s ease, transform 0.2s;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+        }
+
+        .btn:hover {
+            background: #23847a;
+            transform: translateY(-2px);
+        }
+
+        .btn:active {
+            transform: scale(0.95);
+        }
+
+        .alert {
+            font-size: 0.85rem;
+            margin-top: 10px;
+        }
+
+        .form-text {
+            font-size: 0.8rem;
+            color: #888;
+        }
+
+        @media (max-width: 768px) {
+            .form-container {
+                padding: 20px 25px;
+            }
+
+            h2 {
+                font-size: 1.5rem;
+            }
+
+            .btn {
+                font-size: 0.9rem;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        
+        <div class="row justify-content-center mt-5">
+            <div class="col-md-6">
+                <h2 class="text-center mb-4">Register</h2>
+
+                <form method="POST">
+                    {% csrf_token %}
+                    <!-- Username -->
+                    <div class="form-group">
+                        <label for="id_username">Username:</label>
+                        {{ form.username }}
+                        {% if form.username.errors %}
+                        <div class="alert alert-danger">
+                            {% for error in form.username.errors %}
+                            <p>{{ error }}</p>
+                            {% endfor %}
+                        </div>
+                        {% endif %}
+                    </div>
+
+                    <!-- Password -->
+                    <div class="form-group">
+                        <label for="id_password1">Password:</label>
+                        {{ form.password1 }}
+                        {% if form.password1.errors %}
+                        <div class="alert alert-danger">
+                            {% for error in form.password1.errors %}
+                            <p>{{ error }}</p>
+                            {% endfor %}
+                        </div>
+                        {% endif %}
+                        <small class="form-text text-muted">Your password must contain at least 8 characters, including a mix of letters and numbers.</small>
+                    </div>
+
+                    <!-- Password Confirmation -->
+                    <div class="form-group">
+                        <label for="id_password2">Password confirmation:</label>
+                        {{ form.password2 }}
+                        {% if form.password2.errors %}
+                        <div class="alert alert-danger">
+                            {% for error in form.password2.errors %}
+                            <p>{{ error }}</p>
+                            {% endfor %}
+                        </div>
+                        {% endif %}
+                    </div>
+
+                    <!-- Email -->
+                    <div class="form-group">
+                        <label for="id_email">Email address:</label>
+                        {{ form.email }}
+                        {% if form.email.errors %}
+                        <div class="alert alert-danger">
+                            {% for error in form.email.errors %}
+                            <p>{{ error }}</p>
+                            {% endfor %}
+                        </div>
+                        {% endif %}
+                    </div>
+
+                    <!-- Role -->
+                    <div class="form-group">
+                        <label for="id_role">Role:</label>
+                        {{ form.role }}
+                        {% if form.role.errors %}
+                        <div class="alert alert-danger">
+                            {% for error in form.role.errors %}
+                            <p>{{ error }}</p>
+                            {% endfor %}
+                        </div>
+                        {% endif %}
+                    </div>
+
+                    <!-- Phone Number -->
+                    <div class="form-group">
+                        <label for="id_phone_number">Phone number:</label>
+                        {{ form.phone_number }}
+                        {% if form.phone_number.errors %}
+                        <div class="alert alert-danger">
+                            {% for error in form.phone_number.errors %}
+                            <p>{{ error }}</p>
+                            {% endfor %}
+                        </div>
+                        {% endif %}
+                    </div>
+
+                   <!-- USN (only shown for students) -->
+<div class="form-group">
+    <label for="id_usn">USN:</label>
+    {{ form.usn }}
+    {% if form.usn.errors %}
+    <div class="alert alert-danger">
+        {% for error in form.usn.errors %}
+        <p>{{ error }}</p>
+        {% endfor %}
+    </div>
+    {% endif %}
+</div>
+
+<!-- Branch (only shown for teachers) -->
+<div class="form-group">
+    <label for="id_branch">Branch:</label>
+    {{ form.branch }}
+    {% if form.branch.errors %}
+    <div class="alert alert-danger">
+        {% for error in form.branch.errors %}
+        <p>{{ error }}</p>
+        {% endfor %}
+    </div>
+    {% endif %}
+</div>
+
+                    <!-- Submit Button -->
+                    <div class="form-group text-center">
+                        <button type="submit" class="btn btn-primary btn-block">Submit</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+           {% if messages %}
+        <div class="alert alert-success" role="alert">
+            {% for message in messages %}
+            <p>{{ message }}</p>
+            {% endfor %}
+        </div>
+        {% endif %}
+    </div>
+
+   <script>
+    document.addEventListener('DOMContentLoaded', function() {
+        const roleField = document.getElementById("id_role");
+        const usnField = document.getElementById("id_usn");
+        const branchField = document.getElementById("id_branch");
+
+        // Function to toggle the enabled/disabled status of fields
+        function toggleFields() {
+            if (roleField.value === 'teacher') {
+                usnField.disabled = true;
+                branchField.disabled = false;
+            } else if (roleField.value === 'student') {
+                branchField.disabled = true;
+                usnField.disabled = false;
+            }
+        }
+
+        // Call toggleFields to set the initial state of the form fields based on role
+        roleField.addEventListener('change', toggleFields);
+        toggleFields();  // Call once to set the initial state
+
+        // Ensure fields are enabled before submitting the form
+        const form = document.querySelector("form");
+        form.addEventListener('submit', function(event) {
+            // Enable the necessary fields before form submission
+            toggleFields();
+        });
+    });
+</script>
+
+  <!-- Redirect to login after 3 seconds -->
+    {% if messages %}
+    <script type="text/javascript">
+        setTimeout(function() {
+            window.location.href = "{% url 'login' %}";
+        }, 3000); // Redirect after 3 seconds
+    </script>
+    {% endif %}
+
+
+    <!-- Add Bootstrap JS and dependencies -->
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.3/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+
+</html>

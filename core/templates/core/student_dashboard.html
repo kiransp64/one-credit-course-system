@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Student Dashboard</title>
+    <!-- Load static files -->
+    {% load static %}
+    <!-- Link to the student.css file -->
+    <link rel="stylesheet" href="{% static 'css/student.css' %}">
+</head>
+<style>body {
+    background: linear-gradient( #4CAF50, #2F9E99); /* Matching the navbar gradient */
+    font-family: 'Arial', sans-serif;
+}</style>
+<body>
+<div class="container">
+   
+  <!-- Logout Button (Using POST Request) -->
+<form method="POST" action="{% url 'logout' %}">
+    {% csrf_token %}
+    <button type="submit" class="btn btn-danger btn-sm logout-btn">Logout</button>
+</form>
+
+        
+    <h2>Student Dashboard</h2>
+    <p>Welcome, {{ user.username }}! You can view upcoming quizzes, check your performance, and track attendance here.</p>
+
+ <div class="card">
+            <h3>Student Summary</h3>
+            <p>Total Quizzes: <strong>{{ total_quizzes }}</strong></p>
+            <p>Total Quizzes Attended: <strong>{{ total_attended }}</strong></p>
+            <p>Total Score: <strong>{{ total_score }}</strong></p>
+    </div>
+
+
+    <!-- Upcoming Quizzes Section -->
+    <div class="card">
+        <h3>Upcoming Quizzes</h3>
+        <table>
+            <thead>
+                <tr>
+                    <th>Course ID</th>
+                    <th>Question</th>
+                    <th>Upload Date</th>
+                    <th>Action</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for quiz in quizzes %}
+                <tr>
+                    <td>{{ quiz.course_id }}</td>
+                    <td>
+                        {% for question in quiz.questions.all %}
+                            <p>{{ question.question_text }}</p>
+                        {% endfor %}
+                    </td>
+                    <td>{{ quiz.upload_date }}</td>
+                    <td>
+                    {% if quiz.already_attended %}
+                        <span>Already Attempted</span>
+                    {% else %}
+                        <a href="{% url 'take_quiz' quiz.course_id %}">Take Quiz</a>
+                    {% endif %}
+                </td>
+                </tr>
+                {% empty %}
+                <tr class="no-data">
+                    <td colspan="4">No upcoming quizzes found.</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+        <div class="pagination">
+    <span class="step-links">
+        {% if quizzes.has_previous %}
+            <a href="?quiz_page=1">&laquo; first</a>
+            <a href="?quiz_page={{ quizzes.previous_page_number }}">previous</a>
+        {% endif %}
+
+        <span class="current">
+            Page {{ quizzes.number }} of {{ quizzes.paginator.num_pages }}.
+        </span>
+
+        {% if quizzes.has_next %}
+            <a href="?quiz_page={{ quizzes.next_page_number }}">next</a>
+            <a href="?quiz_page={{ quizzes.paginator.num_pages }}">last &raquo;</a>
+        {% endif %}
+    </span>
+</div>
+    </div>
+
+    <!-- Student Performance Section -->
+    <div class="card performance-table">
+        <h3>Student Performance </h3>
+        <table>
+            <thead>
+                <tr>
+                    <th>Quiz</th>
+                    <th>Score</th>
+                    <th>Date Taken</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for performance in performance_data %}
+                <tr>
+                    <td>{{ performance.quiz.course_id }}</td>
+                    <td>{{ performance.score }}</td>
+                    <td>{{ performance.date_taken }}</td>
+                </tr>
+                {% empty %}
+                <tr class="no-data">
+                    <td colspan="3">No performance data found.</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+        <!-- Performance Data Pagination -->
+<div class="pagination">
+    <span class="step-links">
+        {% if performance_data.has_previous %}
+            <a href="?performance_page=1">&laquo; first</a>
+            <a href="?performance_page={{ performance_data.previous_page_number }}">previous</a>
+        {% endif %}
+
+        <span class="current">
+            Page {{ performance_data.number }} of {{ performance_data.paginator.num_pages }}.
+        </span>
+
+        {% if performance_data.has_next %}
+            <a href="?performance_page={{ performance_data.next_page_number }}">next</a>
+            <a href="?performance_page={{ performance_data.paginator.num_pages }}">last &raquo;</a>
+        {% endif %}
+    </span>
+</div>
+    </div>
+
+   <!-- Attendance Section -->
+    <div class="card attendance-table mb-4">
+        <h3>Attendance</h3>
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th>Quiz</th>
+                    <th>Attended</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for attendance in attendance_data %}
+                <tr>
+                    <td>{{ attendance.quiz.course_id }}</td>
+                    <td>{{ attendance.is_attended }}</td>
+                </tr>
+                {% empty %}
+                <tr class="no-data">
+                    <td colspan="2" class="text-center">No attendance data found.</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+    <!-- Attendance Data Pagination -->
+<div class="pagination">
+    <span class="step-links">
+        {% if attendance_data.has_previous %}
+            <a href="?attendance_page=1">&laquo; first</a>
+            <a href="?attendance_page={{ attendance_data.previous_page_number }}">previous</a>
+        {% endif %}
+
+        <span class="current">
+            Page {{ attendance_data.number }} of {{ attendance_data.paginator.num_pages }}.
+        </span>
+
+        {% if attendance_data.has_next %}
+            <a href="?attendance_page={{ attendance_data.next_page_number }}">next</a>
+            <a href="?attendance_page={{ attendance_data.paginator.num_pages }}">last &raquo;</a>
+        {% endif %}
+    </span>
+</div>
+</div>
+</body>
+</html>
